@@ -11,7 +11,7 @@ A VSCode extension to aid in packing and deploying none C# mods that works on Wi
 - Does both at the same time.
 - Supports Windows, Linux, and Mac systems
 
-More features are planned and in the works like generating the base files for various frameworks and automatic updaiting of the version in manifest.json files.
+More features are planned and in the works like generating the base files for various frameworks and automatic updating of the version in manifest.json files.
 
 
 ## Basic Usage

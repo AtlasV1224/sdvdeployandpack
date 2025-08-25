@@ -14,6 +14,14 @@
     "vscode": "^1.103.0"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
+  "homepage": "https://github.com/AtlasV1224/sdvdeployandpack",
+  "bugs": {
+    "url": "https://github.com/AtlasV1224/sdvdeployandpack/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AtlasV1224/sdvdeployandpack"
+  },
   "pricing": "Free",
   "categories": [
     "Other"
