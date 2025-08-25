@@ -1,0 +1,22 @@
+{
+	// IMPORTANT: Set the Stardew Valley file path in the extension settings, run Stardew Valley: Settings in the command pallette (ctrl + shift + p, or cmd + shift + p) to access them
+
+	// The file path within the Stardew Valley folder to place zipped mods (Defaults to Stardew Valley/ZippedMods)
+
+	"ZipPath": "",
+
+
+	// The file path to the mods folder within the Stardew Valley folder to deploy mods (Defaults to Stardew Valley/Mods)
+
+	"ModFolderPath": "",
+
+
+	// The file path to the StardewModdingAPI shortcut within the Stardew Valley folder (Defaults to Stardew Valley/StardewModdingAPI, with the ModFolderPath as an argument)
+
+	"SMAPIPath": "",
+
+
+	// The version of the mod, if specified, the mod zip folder will have the version added after
+
+	"ModVersion": ""
+}

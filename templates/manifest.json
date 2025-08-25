@@ -1,0 +1,22 @@
+{
+    "$schema": "https://smapi.io/schemas/manifest.json",
+    "Name": "",
+    "Author": "",
+    "Version":"",
+    "Description": "",
+    "UniqueID": "",
+    "UpdateKeys": [],
+    // "MinimumApiVersion": "",
+    // "MinimumGameVersion": "",
+    // "ContentPackFor": {
+    //     "UniqueID": "",
+    //     "MinimumVersion": "",
+    // },
+    // "Dependencies": [
+    //     {
+    //         "UniqueID": "Pathoschild.LookupAnything",
+    //         "MinimumVersion": "",
+    //         "IsRequired": true,
+    //     },
+    // ],
+}

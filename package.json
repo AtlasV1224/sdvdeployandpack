@@ -1,0 +1,107 @@
+{
+  "name": "sdvdeployandpack",
+  "publisher": "atlasv",
+  "displayName": "Stardew Valley: Deploy And Pack",
+  "description": "A VSCode extension to aid in deploying and packing various none C# mods for Stardew Valley",
+  "version": "0.1.0",
+  "preview": true,
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#232323",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "pricing": "Free",
+  "categories": [
+    "Other"
+  ],
+  "keywords": ["Stardew", "SDV", "Pack", "Deploy", "AtlasV", "Atlas"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sdvdeployandpack.SDVGenerateCoreFiles",
+        "title": "Generate core files",
+        "category": "StardewValley"
+      },
+      {
+        "command": "sdvdeployandpack.SDVDeployAndPack",
+        "title": "Deploy and Pack",
+        "category": "StardewValley"
+      },
+      {
+        "command": "sdvdeployandpack.SDVDeploy",
+        "title": "Deploy",
+        "category": "StardewValley"
+      },
+      {
+        "command": "sdvdeployandpack.SDVPack",
+        "title": "Pack",
+        "category": "StardewValley"
+      },
+      {
+        "command": "sdvdeployandpack.SDVOpenSettings",
+        "title": "Settings",
+        "category": "StardewValley"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "Stardew Valley: Deploy and Pack",
+        "properties": {
+          "sdvdeployandpack.StardewValleyPath": {
+            "type": "string",
+            "default": "",
+            "description": "The location of the Stardew Valley installation",
+            "order": 0
+          }
+        }
+      }
+    ],
+    "languages": [
+      {
+        "id": "sdvextensionjson",
+        "aliases": [
+          "SDV Extension JSON"
+        ],
+        "extensions": [
+          ".sdvextension"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sdvextensionjson",
+        "scopeName": "source.json.comments",
+        "path": "./syntaxes/JSONC.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/archiver": "^6.0.3",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.103.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.32.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1"
+  }
+}

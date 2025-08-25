@@ -1,0 +1,5 @@
+[
+    //A list of files to ignore when packing the mod into a zip, seperated by comma and wildcard supported (*), trail with / to define folders
+    "*.sdvextension",
+    ".git/",
+]
