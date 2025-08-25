@@ -1,4 +1,4 @@
-# sdvdeployandpack README
+# Stardew Valley: Deploy and Pack
 
 A VSCode extension to aid in packing and deploying none C# mods that works on Windows, Linux, and Mac.
 
