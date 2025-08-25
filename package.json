@@ -3,17 +3,29 @@
   "publisher": "atlasv",
   "displayName": "Stardew Valley: Deploy And Pack",
   "description": "A VSCode extension to aid in deploying and packing various none C# mods for Stardew Valley",
-  "version": "0.1.0",
+  "version": "0.1.0-preview",
   "preview": true,
   "icon": "icon.png",
   "galleryBanner": {
     "color": "#232323",
     "theme": "dark"
   },
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FAtlasV1224%2Fsdvdeployandpack%2Frefs%2Fheads%2Fmaster%2Fpackage.json&query=%24.version&label=Version&labelColor=%23333&color=%23555",
+      "href": "https://github.com/AtlasV1224/sdvdeployandpack/blob/master/CHANGELOG.md",
+      "description": "Latest Version"
+    },
+    {
+      "url": "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FAtlasV1224%2Fsdvdeployandpack%2Frefs%2Fheads%2Fmaster%2Fpackage.json&query=%24.license&label=License&labelColor=%23333&color=%23555",
+      "href": "https://github.com/AtlasV1224/sdvdeployandpack/blob/master/LICENSE.txt",
+      "description": "License"
+    }
+  ],
   "engines": {
     "vscode": "^1.103.0"
   },
-  "license": "SEE LICENSE IN LICENSE.txt",
+  "license": "MIT",
   "homepage": "https://github.com/AtlasV1224/sdvdeployandpack",
   "bugs": {
     "url": "https://github.com/AtlasV1224/sdvdeployandpack/issues"

@@ -1,3 +1,9 @@
+[![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FAtlasV1224%2Fsdvdeployandpack%2Frefs%2Fheads%2Fmaster%2Fpackage.json&query=%24.version&label=Version&labelColor=%23333&color=%23555)](https://github.com/AtlasV1224/sdvdeployandpack/blob/master/CHANGELOG.md)
+[![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FAtlasV1224%2Fsdvdeployandpack%2Frefs%2Fheads%2Fmaster%2Fpackage.json&query=%24.license&label=License&labelColor=%23333&color=%23555)](https://github.com/AtlasV1224/sdvdeployandpack/blob/master/LICENSE.txt)
+
+
+
+
 # Stardew Valley: Deploy and Pack
 
 A VSCode extension to aid in packing and deploying none C# mods that works on Windows, Linux, and Mac.
