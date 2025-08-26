@@ -7,7 +7,7 @@
 - Support for automatic version incrementing for all manifest.json files
 
 
-## [0.1.0-preview] - 2025-08-25
+## [0.1.0-prerelease] - 2025-08-25
 
 ### Added
 - Automatic deployment of mods and launching Stardew Modding API
