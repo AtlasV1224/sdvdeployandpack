@@ -208,8 +208,6 @@ export async function quickPickRun(actions: QuickPickAction[], QuickPickInputStr
 
     // Makes sure if the user cancels, it does nothing
     if (!choice) {
-        //DEBUG
-        vscode.window.showInformationMessage("Canceled");
         return;
     }
 
@@ -289,8 +287,6 @@ export async function copyTemplateFiles(templateKey: string) {
         }
 
         await copyRecursive(templateFolderPath, targetFolderUri);
-        //DEBUG
-        vscode.window.showInformationMessage(`Template folder created: ${targetFolderName}`);
     } catch (err) {
         vscode.window.showErrorMessage(`Failed to copy template files: ${err}`);
     }

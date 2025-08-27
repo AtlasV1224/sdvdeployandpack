@@ -21,21 +21,14 @@ export function activate(context: vscode.ExtensionContext) {
 		const filesToCopy = [
 			{ src: "ConfigOverride.sdvextension", dest: vscode.Uri.joinPath(workspaceUri, 'ConfigOverride.sdvextension') },
 			{ src: "IgnoreFiles.sdvextension", dest: vscode.Uri.joinPath(workspaceUri, 'IgnoreFiles.sdvextension') },
-			//TESTING { src: "manifest.json", dest: vscode.Uri.joinPath(workspaceUri, 'manifest.json'), skipIfExists: true }
 		];
 
 		try {
 			// Loops through all entries and actually copies the files
-			for (const { src, dest/*TESTING, skipIfExists*/ } of filesToCopy) {
+			for (const { src, dest } of filesToCopy) {
 				const filePath = path.join(extensionPath, 'templates', src);
 				const fileData = fs.readFileSync(filePath);
 
-				/*TESTING
-				if (skipIfExists) {
-					try { await vscode.workspace.fs.stat(dest); vscode.window.showInformationMessage(`${src} already exists, skipping.`); continue; }
-					catch {}
-				}
-				*/
 				await vscode.workspace.fs.writeFile(dest, fileData);
 			}
 			// Open the config file as the active window for initial configuration
