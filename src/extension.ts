@@ -2,7 +2,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import archiver from 'archiver';
 import * as helpers from './helpers';
 
 
@@ -10,13 +9,10 @@ export function activate(context: vscode.ExtensionContext) {
 	// Proof of extension activation
 	console.log('Stardew Valley Deploy and Pack is active');
 
-	// Function Tool
-
-
 
 	// Copies the core files from the templates folder into the user workspace
 	const SDVGenerateCoreFiles = vscode.commands.registerCommand('sdvdeployandpack.SDVGenerateCoreFiles', async () => {
-		if (!vscode.workspace.workspaceFolders) {return vscode.window.showErrorMessage('No workspace folder open');}
+		if (!vscode.workspace.workspaceFolders) { return vscode.window.showErrorMessage('No workspace folder open'); }
 
 		const workspaceUri = vscode.workspace.workspaceFolders[0].uri;
 		const extensionPath = vscode.extensions.getExtension('atlasv.sdvdeployandpack')!.extensionPath;
@@ -52,13 +48,13 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	const SDVDeployAndPack = vscode.commands.registerCommand('sdvdeployandpack.SDVDeployAndPack', async () => {
-		if (!vscode.workspace.workspaceFolders) {return vscode.window.showErrorMessage('No workspace folder open');}
+		if (!vscode.workspace.workspaceFolders) { return vscode.window.showErrorMessage('No workspace folder open'); }
 		await vscode.commands.executeCommand(`sdvdeployandpack.SDVPack`);
 		await vscode.commands.executeCommand(`sdvdeployandpack.SDVDeploy`);
 	});
 
 	const SDVPack = vscode.commands.registerCommand('sdvdeployandpack.SDVPack', async () => {
-		if (!vscode.workspace.workspaceFolders) {return vscode.window.showErrorMessage('No workspace folder open');}
+		if (!vscode.workspace.workspaceFolders) { return vscode.window.showErrorMessage('No workspace folder open'); }
 		const workspaceUri = vscode.workspace.workspaceFolders[0].uri;
 		const filteredItems = await helpers.getWorkspaceItemsFiltered(workspaceUri);
 		const { zipPath, modVersion } = await helpers.getPathsFromConfig();
@@ -68,7 +64,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 	const SDVDeploy = vscode.commands.registerCommand('sdvdeployandpack.SDVDeploy', async () => {
-		if (!vscode.workspace.workspaceFolders) {return vscode.window.showErrorMessage('No workspace folder open');}
+		if (!vscode.workspace.workspaceFolders) { return vscode.window.showErrorMessage('No workspace folder open'); }
 		vscode.window.showInformationMessage('Began deploy process');
 
 		const workspaceUri = vscode.workspace.workspaceFolders[0].uri;
@@ -163,12 +159,26 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 
+	const SDVGenerateTemplates = vscode.commands.registerCommand('sdvdeployandpack.SDVGenerateTemplates', async () => {
+		await helpers.quickPickRun(
+			[
+				{ label: "Alternative Textures", action: () => helpers.copyTemplateFiles("AlternativeTextures") },
+				{ label: "Content Patcher", action: () => helpers.copyTemplateFiles("ContentPatcher") },
+				{ label: "Custom Companions", action: () => helpers.copyTemplateFiles("CustomCompanions") },
+				{ label: "Fashion Sense", action: () => helpers.copyTemplateFiles("FashionSense") },
+			],
+			"Choose which content pack files to generate"
+		);
+	});
+
+
 	context.subscriptions.push(
 		SDVGenerateCoreFiles,
 		SDVDeployAndPack,
 		SDVPack,
 		SDVDeploy,
-		SDVOpenSettings
+		SDVOpenSettings,
+		SDVGenerateTemplates
 	);
 }
 

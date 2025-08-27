@@ -67,6 +67,11 @@
         "command": "sdvdeployandpack.SDVOpenSettings",
         "title": "Settings",
         "category": "StardewValley"
+      },
+      {
+        "command": "sdvdeployandpack.SDVGenerateTemplates",
+        "title": "Generate content pack files",
+        "category": "StardewValley"
       }
     ],
     "configuration": [

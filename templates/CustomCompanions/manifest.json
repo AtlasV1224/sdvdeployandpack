@@ -6,17 +6,15 @@
     "Description": "",
     "UniqueID": "",
     "UpdateKeys": [],
-    // "MinimumApiVersion": "",
-    // "MinimumGameVersion": "",
-    // "ContentPackFor": {
-    //     "UniqueID": "",
-    //     "MinimumVersion": "",
-    // },
+    "ContentPackFor": {
+        "UniqueID": "PeacefulEnd.CustomCompanions",
+        "MinimumVersion": "USE.LATEST.VERSION",
+    },
     // "Dependencies": [
     //     {
-    //         "UniqueID": "Pathoschild.LookupAnything",
+    //         "UniqueID": "",
     //         "MinimumVersion": "",
-    //         "IsRequired": true,
+    //         "IsRequired": true, //true or false
     //     },
     // ],
 }

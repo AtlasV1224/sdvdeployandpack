@@ -3,9 +3,12 @@ import * as path from 'path';
 import * as fs from 'fs';
 import archiver from 'archiver';
 
+
+
 export function stripLeadingSlash(s: string) {
     return s.replace(/^\/+/, '');
 }
+
 
 // Removes inline and multiline comments, and trailing commas
 export function sanitizeJson(content: string): string {
@@ -14,6 +17,7 @@ export function sanitizeJson(content: string): string {
         .replace(/\/\*[\s\S]*?\*\//g, '')
         .replace(/,\s*([\]}])/g, '$1');
 }
+
 
 // Converts the file at the specified URI into a string in utf8 format
 export async function readFileAsString(uri: vscode.Uri): Promise<string | null> {
@@ -25,6 +29,7 @@ export async function readFileAsString(uri: vscode.Uri): Promise<string | null> 
     }
 }
 
+
 // ConfigOverride.sdvextension Parser
 export async function getPathsFromConfig(): Promise<{
     zipPath: string;
@@ -33,6 +38,7 @@ export async function getPathsFromConfig(): Promise<{
     modVersion: string;
     rawModFolderPath: string;
 }> {
+    // Open workspace check
     if (!vscode.workspace.workspaceFolders) {
         vscode.window.showErrorMessage("No workspace folder open");
         return {
@@ -115,13 +121,14 @@ export async function getWorkspaceItemsFiltered(workspaceUri: vscode.Uri): Promi
         !ignoreList.some(pattern => {
             const isDir = pattern.endsWith("/");
             const clean = (isDir ? pattern.slice(0, -1) : pattern).trim();
-            if (!clean) return false;
+            if (!clean) { return false; }
             return toRegex(clean, isDir).test(itemPath);
         })
     );
 
     return filtered;
 }
+
 
 // I cried; how does regex work (thx Ryan, couldn't do this without you)
 export function toRegex(pattern: string, isDir: boolean): RegExp {
@@ -173,4 +180,118 @@ export async function createZip(filteredItems: string[], workspaceUri: vscode.Ur
     }
 
     await archive.finalize();
+}
+
+
+// Defines how QuickPick entries should look in the code
+type QuickPickAction = {
+    label: string;
+    action: () => Promise<void> | void;
+};
+
+
+// Does the QuickPick thing modularly so that it can be reused (one layer only)
+export async function quickPickRun(actions: QuickPickAction[], QuickPickInputStr: string) {
+
+    // Open workspace check
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+        vscode.window.showErrorMessage("No workspace folder open");
+        return;
+    }
+
+    // Controls how the QuickPick displays to the user
+    const choice = await vscode.window.showQuickPick(
+        actions.map(a => a.label),
+        { placeHolder: QuickPickInputStr }
+    );
+
+    // Makes sure if the user cancels, it does nothing
+    if (!choice) {
+        //DEBUG
+        vscode.window.showInformationMessage("Canceled");
+        return;
+    }
+
+    // Finds the matching action for the user choice and if found, calls the function
+    const selected = actions.find(a => a.label === choice);
+    if (selected) {
+        await selected.action();
+    }
+}
+
+
+
+export async function copyTemplateFiles(templateKey: string) {
+
+    // Open workspace check
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+        vscode.window.showErrorMessage("No workspace folder open");
+        return;
+    }
+
+    const workspaceUri = workspaceFolders[0].uri;
+    const workspaceName = path.basename(workspaceUri.fsPath);
+
+    // templateArgs dict (append for more template types)
+    const templatesArgs: Record<string, string> = {
+        AlternativeTextures: "[AT]",
+        ContentPatcher: "[CP]",
+        CustomCompanions: "[CC]",
+        FashionSense: "[FS]",
+    };
+
+    // Prevents folders being made if invalid templateKey given
+    const folderPrefix = templatesArgs[templateKey];
+    if (!folderPrefix) {
+        return;
+    }
+
+    const targetFolderName = `${folderPrefix} ${workspaceName}`;
+    const targetFolderUri = vscode.Uri.joinPath(workspaceUri, targetFolderName);
+
+    // Create folder if it doesn't exist
+    try {
+        await vscode.workspace.fs.createDirectory(targetFolderUri);
+    } catch (err) {
+        //DEBUG
+        vscode.window.showErrorMessage(`Failed to create folder: ${err}`);
+        return;
+    }
+
+    // Copies files recursively and skips existing files
+    try {
+        const extensionPath = vscode.extensions.getExtension('atlasv.sdvdeployandpack')!.extensionPath;
+        const templateFolderPath = path.join(extensionPath, 'templates', templateKey);
+
+        async function copyRecursive(srcPath: string, destUri: vscode.Uri) {
+            const entries = fs.readdirSync(srcPath, { withFileTypes: true });
+            for (const entry of entries) {
+                const entrySrcPath = path.join(srcPath, entry.name);
+                const entryDestUri = vscode.Uri.joinPath(destUri, entry.name);
+
+                if (entry.isDirectory()) {
+                    await vscode.workspace.fs.createDirectory(entryDestUri);
+                    await copyRecursive(entrySrcPath, entryDestUri);
+                } else if (entry.isFile()) {
+                    try {
+                        await vscode.workspace.fs.stat(entryDestUri);
+                        // Checks for file existing, skips if it does
+                        continue;
+                    } catch {
+                        // Makes it if it doesn't
+                        const data = fs.readFileSync(entrySrcPath);
+                        await vscode.workspace.fs.writeFile(entryDestUri, data);
+                    }
+                }
+            }
+        }
+
+        await copyRecursive(templateFolderPath, targetFolderUri);
+        //DEBUG
+        vscode.window.showInformationMessage(`Template folder created: ${targetFolderName}`);
+    } catch (err) {
+        vscode.window.showErrorMessage(`Failed to copy template files: ${err}`);
+    }
 }

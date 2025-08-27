@@ -1,0 +1,21 @@
+{
+    "$schema": "https://smapi.io/schemas/manifest.json",
+    "Name": "",
+    "Author": "",
+    "Version": "",
+    "Description": "",
+    "UniqueID": "",
+    "UpdateKeys": [],
+    "ContentPackFor": {
+        "UniqueID": "PeacefulEnd.FashionSense",
+        "MinimumVersion": "USE.LATEST.VERSION"
+    }
+    // "Dependencies": [
+    //     {
+    //         "UniqueID": "",
+    //         "MinimumVersion": "",
+    //         "IsRequired": true, //true or false
+    //     },
+    // ],
+}
+

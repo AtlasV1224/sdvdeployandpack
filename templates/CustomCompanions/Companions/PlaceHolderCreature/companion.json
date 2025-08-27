@@ -1,0 +1,12 @@
+{
+    "Name": "",
+    "Type": "",
+    "FrameSizeWidth": 0,
+    "FrameSizeHeight": 0,
+    // "TileSheetPath": "", // Required when using an existing game asset
+    "UniformAnimation": {
+        "StartingFrame": 0,
+        "NumberOfFrames": 0,
+        "Duration": 0
+    }
+}
