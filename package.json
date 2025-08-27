@@ -3,8 +3,8 @@
   "publisher": "atlasv",
   "displayName": "Stardew Valley: Deploy And Pack",
   "description": "A VSCode extension to aid in deploying and packing various none C# mods for Stardew Valley",
-  "version": "0.1.0",
-  "preview": true,
+  "version": "0.2.0",
+  "preview": false,
   "icon": "icon.png",
   "galleryBanner": {
     "color": "#232323",
