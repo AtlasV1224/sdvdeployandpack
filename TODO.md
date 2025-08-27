@@ -1,0 +1,2 @@
+- [x] Support for generating base content pack files
+- [ ] Support for automatic versioning in manifest files
