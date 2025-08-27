@@ -1,2 +1,6 @@
 - [x] Support for generating base content pack files
+    - [x] CP
+    - [x] AT
+    - [x] CC
+    - [x] FS
 - [ ] Support for automatic versioning in manifest files

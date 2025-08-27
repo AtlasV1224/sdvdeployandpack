@@ -16,6 +16,11 @@ A VSCode extension to aid in packing and deploying none C# mods that works on Wi
 - Deploys the mod into a specifiable mod folder, seperate from the working folder, and loads the game with the mod installed.
 - Does both at the same time.
 - Supports Windows, Linux, and Mac systems
+- Can generate base files for:
+    - Content Patcher
+    - Alternative Textures
+    - Custom Companions
+    - Fashion Sense
 
 More features are planned and in the works like generating the base files for various frameworks and automatic updating of the version in manifest.json files.
 
